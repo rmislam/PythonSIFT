@@ -6,8 +6,10 @@ from scipy.stats import multivariate_normal
 from numpy.linalg import norm
 import numpy.linalg
 
-# INPUTS: imagename (filename of image, string) and threshold (constrast threshold, int or float)
-# OUTPUT: list of four 3D arrays, where each array (pyramid) has a 1 where an extremum was located and 0 elsewhere
+# INPUTS: imagename (filename of image, string) 
+#         threshold (constrast threshold, int or float)
+# OUTPUT: keypoints (an array of four column, where the first is the x location, the second is the y location, the third is the scale, and the fourth is the orientation)
+#         descriptors (an array of 128 columns, which correspond to the SIFT descriptor)
 
 def detect_keypoints(imagename, threshold):
     # SIFT Detector 
@@ -470,21 +472,7 @@ def detect_keypoints(imagename, threshold):
         descriptors[i, :] = np.clip(descriptors[i, :], 0, 0.2)
         descriptors[i, :] = descriptors[i, :] / norm(descriptors[i, :])
                 
-                
 
-    #overlay = original
-
-    
-    #for j in range(10, quartered.shape[0] - 10):
-    #    for k in range(10, quartered.shape[1] - 10):
-    #        if extrpyrlvl4[j, k, 1] == 1:
-    #            for w in range(-5, 6):
-    #                overlay[4*j+w, 4*k-5] = 255;
-    #                overlay[4*j-5, 4*k+w] = 255;
-    #                overlay[4*j+w, 4*k+5] = 255;
-    #                overlay[4*j+5, 4*k+w] = 255;
-
-    #misc.imsave('overlay.jpg', overlay)
 
     return [keypoints, descriptors]
 
