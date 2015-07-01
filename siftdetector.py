@@ -319,6 +319,8 @@ def detect_keypoints(imagename, threshold):
                     for x in range(int(-1 * two_sd * 2), int(two_sd * 2) + 1):
                         ylim = int((((two_sd * 2) ** 2) - (np.absolute(x) ** 2)) ** 0.5)
                         for y in range(-1 * ylim, ylim + 1):
+                            if j + x < 0 or j + x > doubled.shape[0] - 1 or k + y < 0 or k + y > doubled.shape[1] - 1:
+                                continue
                             weight = magpyrlvl1[j + x, k + y, i] * gaussian_window.pdf([j + x, k + y])
                             bin_idx = np.clip(np.floor(oripyrlvl1[j + x, k + y, i]), 0, 35)
                             orient_hist[np.floor(bin_idx)] += weight  
@@ -346,6 +348,8 @@ def detect_keypoints(imagename, threshold):
                     for x in range(int(-1 * two_sd), int(two_sd + 1)):
                         ylim = int(((two_sd ** 2) - (np.absolute(x) ** 2)) ** 0.5)
                         for y in range(-1 * ylim, ylim + 1):
+                            if j + x < 0 or j + x > normal.shape[0] - 1 or k + y < 0 or k + y > normal.shape[1] - 1:
+                                continue
                             weight = magpyrlvl2[j + x, k + y, i] * gaussian_window.pdf([j + x, k + y])
                             bin_idx = np.clip(np.floor(oripyrlvl2[j + x, k + y, i]), 0, 35)
                             orient_hist[np.floor(bin_idx)] += weight  
@@ -373,6 +377,8 @@ def detect_keypoints(imagename, threshold):
                     for x in range(int(-1 * two_sd * 0.5), int(two_sd * 0.5) + 1):
                         ylim = int((((two_sd * 0.5) ** 2) - (np.absolute(x) ** 2)) ** 0.5)
                         for y in range(-1 * ylim, ylim + 1):
+                            if j + x < 0 or j + x > halved.shape[0] - 1 or k + y < 0 or k + y > halved.shape[1] - 1:
+                                continue
                             weight = magpyrlvl3[j + x, k + y, i] * gaussian_window.pdf([j + x, k + y])
                             bin_idx = np.clip(np.floor(oripyrlvl3[j + x, k + y, i]), 0, 35)
                             orient_hist[np.floor(bin_idx)] += weight  
@@ -400,6 +406,8 @@ def detect_keypoints(imagename, threshold):
                     for x in range(int(-1 * two_sd * 0.25), int(two_sd * 0.25) + 1):
                         ylim = int((((two_sd * 0.25) ** 2) - (np.absolute(x) ** 2)) ** 0.5)
                         for y in range(-1 * ylim, ylim + 1):
+                            if j + x < 0 or j + x > quartered.shape[0] - 1 or k + y < 0 or k + y > quartered.shape[1] - 1:
+                                continue
                             weight = magpyrlvl4[j + x, k + y, i] * gaussian_window.pdf([j + x, k + y])
                             bin_idx = np.clip(np.floor(oripyrlvl4[j + x, k + y, i]), 0, 35)
                             orient_hist[np.floor(bin_idx)] += weight  
@@ -462,7 +470,9 @@ def detect_keypoints(imagename, threshold):
                     factor = 4;
 
                 x0 = int(factor * keypoints[i,0])
+                keypoints[i,0] = x0
                 y0 = int(factor * keypoints[i,1])
+                keypoints[i,1] = y0
                 gaussian_window = multivariate_normal(mean=[x0,y0], cov=8) 
                 weight = magpyr[x0 + xrot, y0 + yrot, scale_idx] * gaussian_window.pdf([x0 + xrot, y0 + yrot])
                 angle = oripyr[x0 + xrot, y0 + yrot, scale_idx] - keypoints[i,3]
