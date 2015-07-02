@@ -1,7 +1,11 @@
 # PythonSIFT
 
-Running from python in terminal:
 
+
+# Match a template to an image:
+The wrapper function '''match_template''' is used to call '''detect_keypoints''':
+
+Running from python in terminal:
 ```python
 from siftmatch import match_template
 match_template(imagename, templatename, threshold, cutoff)
@@ -9,6 +13,9 @@ match_template(imagename, templatename, threshold, cutoff)
 where ```imagename``` and ```templatename``` are filename strings (e.g., ```"image.jpg"```), ```threshold``` is the contrast threshold for the sift detector, and ```cutoff``` is the maximum distance between a keypoint descriptor in the image and a keypoint descriptor in the template for the two keypoints to be considered a match. A good value for ```threshold``` is ```5```.
 
 
+# Use SIFT detector/descriptor function directly:
+
+Running from python in terminal:
 ```python
 from siftdetector import detect_keypoints
 [keypoints, descriptors] = detect_keypoints(imagename, threshold)
