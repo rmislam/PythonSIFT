@@ -13,4 +13,4 @@ where ```imagename``` and ```templatename``` are filename strings (e.g., ```"ima
 from siftdetector import detect_keypoints
 [keypoints, descriptors] = detect_keypoints(imagename, threshold)
 ```
-where ```imagename``` and '''threshold''' are defined as above, '''keypoints''' is an '''n''' by '''4''' numpy array that holds the '''n''' keypoints (the first column is the image row coordinate, the second column is the image column coordinate, the third column is the scale, and the fourth column is the orientation as a bin index), and descriptors is an '''n''' by '''128''' numpy array where each row is the SIFT descriptor for the respective keypoint.
+where ```imagename``` and ```threshold``` are defined as above, ```keypoints``` is an ```n``` by ```4``` numpy array that holds the ```n``` keypoints (the first column is the image row coordinate, the second column is the image column coordinate, the third column is the scale, and the fourth column is the orientation as a bin index), and descriptors is an ```n``` by ```128``` numpy array where each row is the SIFT descriptor for the respective keypoint.
