@@ -1,9 +1,9 @@
 # PythonSIFT
 
+This is an implementation of SIFT done entirely in Python with the help of NumPy. A wrapper function, ```match_template()```, matches a template to an image and displays the result as a demonstration of the SIFT algorithm. 
 
-
-# Match a template to an image:
-The wrapper function ```match_template``` is used to call ```detect_keypoints```.
+# Match a template to an image
+The wrapper function ```match_template()``` is used to call ```detect_keypoints()```.
 
 Running from python in terminal:
 ```python
@@ -13,7 +13,7 @@ match_template(imagename, templatename, threshold, cutoff)
 where ```imagename``` and ```templatename``` are filename strings (e.g., ```"image.jpg"```), ```threshold``` is the contrast threshold for the sift detector, and ```cutoff``` is the maximum distance between a keypoint descriptor in the image and a keypoint descriptor in the template for the two keypoints to be considered a match. A good value for ```threshold``` is ```5```.
 
 
-# Use SIFT detector/descriptor function directly:
+# Use SIFT detector/descriptor function directly
 
 Running from python in terminal:
 ```python
