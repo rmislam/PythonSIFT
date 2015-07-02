@@ -12,7 +12,7 @@ match_template(imagename, templatename, threshold, cutoff)
 ```
 where ```imagename``` and ```templatename``` are filename strings (e.g., ```"image.jpg"```), ```threshold``` is the contrast threshold for the sift detector, and ```cutoff``` is the maximum distance between a keypoint descriptor in the image and a keypoint descriptor in the template for the two keypoints to be considered a match. A good value for ```threshold``` is ```5```.
 
-Note that if there are too many keypoints, ```flann.knnSearch()``` on line ```16``` of ```siftmatch.py``` may fail if you don't have enough RAM. 
+Note that if there are too many keypoints, ```flann.knnSearch()``` on line ```16``` of ```siftmatch.py``` may fail if you don't have enough RAM. Increasing ```threshold``` will reduce the number of keypoints found by SIFT. 
 
 # Use the SIFT detector/descriptor function directly
 
