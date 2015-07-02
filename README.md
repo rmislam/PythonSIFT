@@ -6,7 +6,7 @@ Running from python in terminal:
 from siftmatch import match_template
 match_template(imagename, templatename, threshold, cutoff)
 ```
-where ```imagename``` and ```templatename``` are filename strings (e.g., ```"image.jpeg"```), ```threshold``` is the contrast threshold for the sift detector, and ```cutoff``` is the maximum distance between a keypoint descriptor in the image and a keypoint descriptor in the template for the two keypoints to be considered a match. A good value for ```threshold``` is ```5```.
+where ```imagename``` and ```templatename``` are filename strings (e.g., ```"image.jpg"```), ```threshold``` is the contrast threshold for the sift detector, and ```cutoff``` is the maximum distance between a keypoint descriptor in the image and a keypoint descriptor in the template for the two keypoints to be considered a match. A good value for ```threshold``` is ```5```.
 
 
 ```python
