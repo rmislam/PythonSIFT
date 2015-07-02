@@ -327,13 +327,13 @@ def detect_keypoints(imagename, threshold):
                     
                     maxval = np.amax(orient_hist)
                     maxidx = np.argmax(orient_hist)
-                    keypoints[count, :] = np.array([j, k, kvectotal[i], maxidx])
+                    keypoints[count, :] = np.array([int(j * 0.5), int(k * 0.5), kvectotal[i], maxidx])
                     count += 1
-		    orient_hist[maxidx] = 0
+                    orient_hist[maxidx] = 0
                     newmaxval = np.amax(orient_hist)
                     while newmaxval > 0.8 * maxval:
                         newmaxidx = np.argmax(orient_hist)
-                        np.append(keypoints, np.array([[j, k, kvectotal[i], newmaxidx]]), axis=0)
+                        np.append(keypoints, np.array([[int(j * 0.5), int(k * 0.5), kvectotal[i], newmaxidx]]), axis=0)
                         orient_hist[newmaxidx] = 0
                         newmaxval = np.amax(orient_hist)
     
@@ -358,7 +358,7 @@ def detect_keypoints(imagename, threshold):
                     maxidx = np.argmax(orient_hist)
                     keypoints[count, :] = np.array([j, k, kvectotal[i + 3], maxidx])
                     count += 1
-		    orient_hist[maxidx] = 0
+                    orient_hist[maxidx] = 0
                     newmaxval = np.amax(orient_hist)
                     while newmaxval > 0.8 * maxval:
                         newmaxidx = np.argmax(orient_hist)
@@ -385,13 +385,13 @@ def detect_keypoints(imagename, threshold):
                     
                     maxval = np.amax(orient_hist)
                     maxidx = np.argmax(orient_hist)
-                    keypoints[count, :] = np.array([j, k, kvectotal[i + 6], maxidx])
+                    keypoints[count, :] = np.array([j * 2, k * 2, kvectotal[i + 6], maxidx])
                     count += 1
-		    orient_hist[maxidx] = 0
+                    orient_hist[maxidx] = 0
                     newmaxval = np.amax(orient_hist)
                     while newmaxval > 0.8 * maxval:
                         newmaxidx = np.argmax(orient_hist)
-                        np.append(keypoints, np.array([[j, k, kvectotal[i + 6], newmaxidx]]), axis=0)
+                        np.append(keypoints, np.array([[j * 2, k * 2, kvectotal[i + 6], newmaxidx]]), axis=0)
                         orient_hist[newmaxidx] = 0
                         newmaxval = np.amax(orient_hist)
     
@@ -414,13 +414,13 @@ def detect_keypoints(imagename, threshold):
                     
                     maxval = np.amax(orient_hist)
                     maxidx = np.argmax(orient_hist)
-                    keypoints[count, :] = np.array([j, k, kvectotal[i + 9], maxidx])
+                    keypoints[count, :] = np.array([j * 4, k * 4, kvectotal[i + 9], maxidx])
                     count += 1
-		    orient_hist[maxidx] = 0
+                    orient_hist[maxidx] = 0
                     newmaxval = np.amax(orient_hist)
                     while newmaxval > 0.8 * maxval:
                         newmaxidx = np.argmax(orient_hist)
-                        np.append(keypoints, np.array([[j, k, kvectotal[i + 9], newmaxidx]]), axis=0)
+                        np.append(keypoints, np.array([[j * 4, k * 4, kvectotal[i + 9], newmaxidx]]), axis=0)
                         orient_hist[newmaxidx] = 0
                         newmaxval = np.amax(orient_hist)
     
@@ -438,8 +438,8 @@ def detect_keypoints(imagename, threshold):
         oripyr[:, :, i] = ((36.0 / np.amax(oripyr[:, :, i])) * oripyr[:, :, i]).astype(int)
 
     for i in range(0, 3):
-        magpyr[:, :, i+3] = magpyrlvl2[:, :, i]
-        oripyr[:, :, i+3] = oripyrlvl2[:, :, i]             
+        magpyr[:, :, i+3] = (magpyrlvl2[:, :, i]).astype(float)
+        oripyr[:, :, i+3] = (oripyrlvl2[:, :, i]).astype(int)             
     
     for i in range(0, 3):
         magpyr[:, :, i+6] = misc.imresize(magpyrlvl3[:, :, i], (normal.shape[0], normal.shape[1]), "bilinear").astype(int)   
@@ -459,20 +459,8 @@ def detect_keypoints(imagename, threshold):
                 xrot = np.round((np.cos(theta) * x) - (np.sin(theta) * y))
                 yrot = np.round((np.sin(theta) * x) + (np.cos(theta) * y))
                 scale_idx = np.argwhere(kvectotal == keypoints[i,2])[0][0]
-                level = int(scale_idx / 3)
-                if level == 0:
-                    factor = 0.5;
-                elif level == 1:
-                    factor = 1;
-                elif level == 2:
-                    factor = 2;
-                else: 
-                    factor = 4;
-
-                x0 = int(factor * keypoints[i,0])
-                keypoints[i,0] = x0
-                y0 = int(factor * keypoints[i,1])
-                keypoints[i,1] = y0
+                x0 = keypoints[i,0]
+                y0 = keypoints[i,1]
                 gaussian_window = multivariate_normal(mean=[x0,y0], cov=8) 
                 weight = magpyr[x0 + xrot, y0 + yrot, scale_idx] * gaussian_window.pdf([x0 + xrot, y0 + yrot])
                 angle = oripyr[x0 + xrot, y0 + yrot, scale_idx] - keypoints[i,3]
@@ -486,8 +474,7 @@ def detect_keypoints(imagename, threshold):
         descriptors[i, :] = np.clip(descriptors[i, :], 0, 0.2)
         descriptors[i, :] = descriptors[i, :] / norm(descriptors[i, :])
                 
-
-
+ 
     return [keypoints, descriptors]
 
 
