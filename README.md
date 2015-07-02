@@ -3,7 +3,7 @@
 
 
 # Match a template to an image:
-The wrapper function '''match_template''' is used to call '''detect_keypoints''':
+The wrapper function ```match_template``` is used to call ```detect_keypoints```.
 
 Running from python in terminal:
 ```python
