@@ -41,7 +41,7 @@ def detect_keypoints(imagename, threshold):
     pyrlvl3 = np.zeros((halved.shape[0], halved.shape[1], 6))
     pyrlvl4 = np.zeros((quartered.shape[0], quartered.shape[1], 6))
 
-    print "Constructing pyramids..."
+    print("Constructing pyramids...")
 
     # Construct Gaussian pyramids
     for i in range(0, 6):
@@ -69,8 +69,8 @@ def detect_keypoints(imagename, threshold):
     extrpyrlvl3 = np.zeros((halved.shape[0], halved.shape[1], 3))
     extrpyrlvl4 = np.zeros((quartered.shape[0], quartered.shape[1], 3))
 
-    print "Starting extrema detection..."
-    print "First octave"
+    print("Starting extrema detection...")
+    print("First octave")
 
     # In each of the following for loops, elements of each pyramids that are larger or smaller than its 26 immediate neighbors in space and scale are labeled as extrema. As explained in section 4 of Lowe's paper, these initial extrema are pruned by checking that their contrast and curvature are above certain thresholds. The thresholds used here are those suggested by Lowe. 
 
@@ -119,7 +119,7 @@ def detect_keypoints(imagename, threshold):
 		    if ((((dxx + dyy) ** 2) * r) < (dxx * dyy - (dxy ** 2)) * (((r + 1) ** 2))) and (np.absolute(x_hat[0]) < 0.5) and (np.absolute(x_hat[1]) < 0.5) and (np.absolute(x_hat[2]) < 0.5) and (np.absolute(D_x_hat) > 0.03):
 			extrpyrlvl1[j, k, i - 1] = 1
 
-    print "Second octave"
+    print("Second octave")
 
     for i in range(1, 4):
 	for j in range(40, normal.shape[0] - 40):
@@ -166,7 +166,7 @@ def detect_keypoints(imagename, threshold):
 		    if (((dxx + dyy) ** 2) * r) < (dxx * dyy - (dxy ** 2)) * (((r + 1) ** 2)) and np.absolute(x_hat[0]) < 0.5 and np.absolute(x_hat[1]) < 0.5 and np.absolute(x_hat[2]) < 0.5 and np.absolute(D_x_hat) > 0.03:
 			extrpyrlvl2[j, k, i - 1] = 1
 
-    print "Third octave"
+    print("Third octave")
       
     for i in range(1, 4):
 	for j in range(20, halved.shape[0] - 20):
@@ -214,7 +214,7 @@ def detect_keypoints(imagename, threshold):
 			extrpyrlvl3[j, k, i - 1] = 1
 		    
 		      
-    print "Fourth octave"
+    print("Fourth octave")
 
     for i in range(1, 4):
 	for j in range(10, quartered.shape[0] - 10):
@@ -262,10 +262,10 @@ def detect_keypoints(imagename, threshold):
 			extrpyrlvl4[j, k, i - 1] = 1
 		     
 	      
-    print "Number of extrema in first octave: %d" % np.sum(extrpyrlvl1)
-    print "Number of extrema in second octave: %d" % np.sum(extrpyrlvl2)
-    print "Number of extrema in third octave: %d" % np.sum(extrpyrlvl3)
-    print "Number of extrema in fourth octave: %d" % np.sum(extrpyrlvl4)
+    print("Number of extrema in first octave: %d" % np.sum(extrpyrlvl1))
+    print("Number of extrema in second octave: %d" % np.sum(extrpyrlvl2))
+    print("Number of extrema in third octave: %d" % np.sum(extrpyrlvl3))
+    print("Number of extrema in fourth octave: %d" % np.sum(extrpyrlvl4))
     
     # Gradient magnitude and orientation for each image sample point at each scale
     magpyrlvl1 = np.zeros((doubled.shape[0], doubled.shape[1], 3))
@@ -305,7 +305,7 @@ def detect_keypoints(imagename, threshold):
     extr_sum = np.sum(extrpyrlvl1) + np.sum(extrpyrlvl2) + np.sum(extrpyrlvl3) + np.sum(extrpyrlvl4)
     keypoints = np.zeros((extr_sum, 4)) 
 
-    print "Calculating keypoint orientations..."
+    print("Calculating keypoint orientations...")
 
     count = 0
     
@@ -425,7 +425,7 @@ def detect_keypoints(imagename, threshold):
                         newmaxval = np.amax(orient_hist)
     
 
-    print "Calculating descriptor..."
+    print("Calculating descriptor...")
 
     magpyr = np.zeros((normal.shape[0], normal.shape[1], 12))
     oripyr = np.zeros((normal.shape[0], normal.shape[1], 12))
@@ -462,8 +462,8 @@ def detect_keypoints(imagename, threshold):
                 x0 = keypoints[i,0]
                 y0 = keypoints[i,1]
                 gaussian_window = multivariate_normal(mean=[x0,y0], cov=8) 
-                weight = magpyr[x0 + xrot, y0 + yrot, scale_idx] * gaussian_window.pdf([x0 + xrot, y0 + yrot])
-                angle = oripyr[x0 + xrot, y0 + yrot, scale_idx] - keypoints[i,3]
+                weight = magpyr[int(x0 + xrot), int(y0 + yrot), scale_idx] * gaussian_window.pdf([x0 + xrot, y0 + yrot])
+                angle = oripyr[int(x0 + xrot), int(y0 + yrot), scale_idx] - keypoints[i,3]
                 if angle < 0:
                     angle = 36 + angle
 
