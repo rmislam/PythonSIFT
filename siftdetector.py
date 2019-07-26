@@ -45,7 +45,7 @@ def detect_keypoints(imagename, threshold):
 
     # Construct Gaussian pyramids
     for i in range(0, 6):
-	pyrlvl1[:,:,i] = ndimage.filters.gaussian_filter(doubled, kvec1[i])   
+	pyrlvl1[:,:,i] = ndimage.filters.gaussian_filter(doubled, kvec1[i])
 	pyrlvl2[:,:,i] = misc.imresize(ndimage.filters.gaussian_filter(doubled, kvec2[i]), 50, 'bilinear') 
 	pyrlvl3[:,:,i] = misc.imresize(ndimage.filters.gaussian_filter(doubled, kvec3[i]), 25, 'bilinear')
 	pyrlvl4[:,:,i] = misc.imresize(ndimage.filters.gaussian_filter(doubled, kvec4[i]), 1.0 / 8.0, 'bilinear')
