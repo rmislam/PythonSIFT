@@ -45,10 +45,10 @@ def detect_keypoints(imagename, threshold):
 
     # Construct Gaussian pyramids
     for i in range(0, 6):
-	pyrlvl1[:,:,i] = ndimage.filters.gaussian_filter(doubled, kvec1[i])
-	pyrlvl2[:,:,i] = misc.imresize(ndimage.filters.gaussian_filter(doubled, kvec2[i]), 50, 'bilinear') 
-	pyrlvl3[:,:,i] = misc.imresize(ndimage.filters.gaussian_filter(doubled, kvec3[i]), 25, 'bilinear')
-	pyrlvl4[:,:,i] = misc.imresize(ndimage.filters.gaussian_filter(doubled, kvec4[i]), 1.0 / 8.0, 'bilinear')
+        pyrlvl1[:,:,i] = ndimage.filters.gaussian_filter(doubled, kvec1[i])
+        pyrlvl2[:,:,i] = misc.imresize(ndimage.filters.gaussian_filter(doubled, kvec2[i]), 50, 'bilinear') 
+        pyrlvl3[:,:,i] = misc.imresize(ndimage.filters.gaussian_filter(doubled, kvec3[i]), 25, 'bilinear')
+        pyrlvl4[:,:,i] = misc.imresize(ndimage.filters.gaussian_filter(doubled, kvec4[i]), 1.0 / 8.0, 'bilinear')
 
     # Initialize Difference-of-Gaussians (DoG) pyramids
     diffpyrlvl1 = np.zeros((doubled.shape[0], doubled.shape[1], 5))
@@ -58,10 +58,10 @@ def detect_keypoints(imagename, threshold):
 
     # Construct DoG pyramids
     for i in range(0, 5):
-	diffpyrlvl1[:,:,i] = pyrlvl1[:,:,i+1] - pyrlvl1[:,:,i]
-	diffpyrlvl2[:,:,i] = pyrlvl2[:,:,i+1] - pyrlvl2[:,:,i]
-	diffpyrlvl3[:,:,i] = pyrlvl3[:,:,i+1] - pyrlvl3[:,:,i]
-	diffpyrlvl4[:,:,i] = pyrlvl4[:,:,i+1] - pyrlvl4[:,:,i]
+        diffpyrlvl1[:,:,i] = pyrlvl1[:,:,i+1] - pyrlvl1[:,:,i]
+        diffpyrlvl2[:,:,i] = pyrlvl2[:,:,i+1] - pyrlvl2[:,:,i]
+        diffpyrlvl3[:,:,i] = pyrlvl3[:,:,i+1] - pyrlvl3[:,:,i]
+        diffpyrlvl4[:,:,i] = pyrlvl4[:,:,i+1] - pyrlvl4[:,:,i]
 
     # Initialize pyramids to store extrema locations
     extrpyrlvl1 = np.zeros((doubled.shape[0], doubled.shape[1], 3))
@@ -476,7 +476,6 @@ def detect_keypoints(imagename, threshold):
                 
  
     return [keypoints, descriptors]
-
 
 
 
