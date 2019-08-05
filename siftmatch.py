@@ -4,7 +4,7 @@ import cv2
 import itertools
 
 def match_template(imagename, templatename, threshold, cutoff):
-	
+        
     img = cv2.imread(imagename)
     template = cv2.imread(templatename)
 
@@ -26,17 +26,17 @@ def match_template(imagename, templatename, threshold, cutoff):
 
     kpi_cut = []
     for i, dis in itertools.izip(idx, dist):
-    	if dis < cutoff:
-    		kpi_cut.append(kpi[i])
-    	else:
-    		break
+        if dis < cutoff:
+                kpi_cut.append(kpi[i])
+        else:
+                break
 
     kpt_cut = []
     for i, dis in itertools.izip(indices, dist):
-    	if dis < cutoff:
-    		kpt_cut.append(kpt[i])
-    	else:
-    		break
+        if dis < cutoff:
+                kpt_cut.append(kpt[i])
+        else:
+                break
 
     h1, w1 = img.shape[:2]
     h2, w2 = template.shape[:2]
@@ -48,8 +48,8 @@ def match_template(imagename, templatename, threshold, cutoff):
     newimg[:h1, w2:w1+w2] = img
 
     for i in range(min(len(kpi), len(kpt))):
-    	pt_a = (int(kpt[i,1]), int(kpt[i,0] + hdif))
-    	pt_b = (int(kpi[i,1] + w2), int(kpi[i,0]))
-    	cv2.line(newimg, pt_a, pt_b, (255, 0, 0))
+        pt_a = (int(kpt[i,1]), int(kpt[i,0] + hdif))
+        pt_b = (int(kpi[i,1] + w2), int(kpi[i,0]))
+        cv2.line(newimg, pt_a, pt_b, (255, 0, 0))
 
     cv2.imwrite('matches.jpg', newimg)
