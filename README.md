@@ -1,6 +1,6 @@
 # PythonSIFT
 
-This is an implementation of SIFT (David Lowe's scale-invariant feature transform) done entirely in Python with the help of NumPy. This implementation is based on OpenCV's implementation and returns OpenCV `KeyPoint` objects and descriptors, and so can be used as a drop-in replacement for OpenCV SIFT. This repository is intended to help computer vision enthusiasts learn about the details behind SIFT.
+This is an implementation of SIFT (David G. Lowe's scale-invariant feature transform) done entirely in Python with the help of NumPy. This implementation is based on OpenCV's implementation and returns OpenCV `KeyPoint` objects and descriptors, and so can be used as a drop-in replacement for OpenCV SIFT. This repository is intended to help computer vision enthusiasts learn about the details behind SIFT.
 
 ### *Update 2/11/2020*
 
@@ -42,3 +42,15 @@ python template_matching_demo.py
 Anyone is welcome to report and/or fix any bugs. I will resolve any opened issues as soon as possible.
 
 Any questions about the implementation, no matter how simple, are welcome. I will patiently explain my code to you.
+
+### *Original Paper*
+
+["Distinctive Image Features from Scale-Invariant Keypoints", David G. Lowe](https://www.cs.ubc.ca/~lowe/papers/ijcv04.pdf)
+
+Definitely worth a read!
+
+### *Patent Notice*
+
+SIFT is patented, so the code in this repo may **not** be used for commerical purposes. Let me be clear that this repo is for educational purposes only.
+
+You can find the patent [here](https://patents.google.com/patent/US6711293B1/en) (Inventor: David G. Lowe. Assignee: University of British Columbia.).
