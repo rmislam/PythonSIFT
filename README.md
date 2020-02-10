@@ -1,26 +1,41 @@
 # PythonSIFT
 
-This is an implementation of SIFT done entirely in Python with the help of NumPy. A wrapper function, ```match_template()```, matches a template to an image and displays the result as a demonstration of the SIFT algorithm. 
+This is an implementation of SIFT (David Lowe's scale-invariant feature transform) done entirely in Python with the help of NumPy. This implementation is based on OpenCV's implementation and returns OpenCV KeyPoint objects and descriptors, and so can be used as a drop-in replacement for OpenCV SIFT. This repository is intended to help computer vision enthusiasts learn about the details behind SIFT.
 
+### *Update 2/11/2020*
+
+PythonSIFT has been reimplemented (and greatly improved!) in Python 3. You can find the original Python 2 version in the `legacy` branch. However, I strongly recommend you use `master` (the new Python 3 implementation). It's much better.
+
+## Dependencies
+
+Python 3
+NumPy
+OpenCV-Python (`import cv2`)
+
+Last tested successfully using Python 3.7.6 and OpenCV-Python 4.2.0
 Note: this code relies on OpenCV version 2.4.11.
 
-# Match a template to an image
-The wrapper function ```match_template()``` is used to call ```detect_keypoints()```.
+## Usage
 
-Running from python in terminal:
 ```python
-from siftmatch import match_template
-match_template(imagename, templatename, threshold, cutoff)
+import cv2
+import pysift
+
+image = cv2.imread('your_image.png', 0)
+keypoints, descriptors = pysift.computeKeypointsAndDescriptors(image)
 ```
-where ```imagename``` and ```templatename``` are filename strings (e.g., ```"image.jpg"```), ```threshold``` is the contrast threshold for the sift detector, and ```cutoff``` is the maximum distance between a keypoint descriptor in the image and a keypoint descriptor in the template for the two keypoints to be considered a match. A good value for ```threshold``` is ```5```.
 
-Note that if there are too many keypoints, ```flann.knnSearch()``` on line ```16``` of ```siftmatch.py``` may fail if you don't have enough RAM. Increasing ```threshold``` will reduce the number of keypoints found by SIFT. 
+It's as simple as that. Just like OpenCV.
 
-# Use the SIFT detector/descriptor function directly
+The returned `keypoints` are a list of OpenCV `KeyPoint` objects, and the corresponding `descriptors` are a list of `128` element NumPy vectors. They can be used just like the objects returned by OpenCV-Python's SIFT `detectAndCompute` member function.
 
-Running from python in terminal:
+## Template Matching Demo
+
+I've adapted OpenCV's SIFT template matching demo to use PythonSIFT instead. The OpenCV images used in the demo are included in this repo for your convenience.
 ```python
-from siftdetector import detect_keypoints
-[keypoints, descriptors] = detect_keypoints(imagename, threshold)
+python template_matching_demo.py
 ```
-where ```imagename``` and ```threshold``` are defined as above, ```keypoints``` is an ```n``` by ```4``` numpy array that holds the ```n``` keypoints (the first column is the image row coordinate, the second column is the image column coordinate, the third column is the scale, and the fourth column is the orientation as a bin index), and descriptors is an ```n``` by ```128``` numpy array where each row is the SIFT descriptor for the respective keypoint.
+
+## Questions, Concerns, Bugs
+
+Anyone is welcome to report and/or fix any bugs. I will resolve any opened issues as soon as possible. Also, any questions about the implementation, no matter how simple you may think they are, are welcome. I will patiently explain my code to you.
