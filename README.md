@@ -28,7 +28,7 @@ keypoints, descriptors = pysift.computeKeypointsAndDescriptors(image)
 
 It's as simple as that. Just like OpenCV.
 
-The returned `keypoints` are a list of OpenCV `KeyPoint` objects, and the corresponding `descriptors` are a list of `128` element NumPy vectors. They can be used just like the objects returned by OpenCV-Python's SIFT `detectAndCompute` member function.
+The returned `keypoints` are a list of OpenCV `KeyPoint` objects, and the corresponding `descriptors` are a list of `128` element NumPy vectors. They can be used just like the objects returned by OpenCV-Python's SIFT `detectAndCompute` member function. Note that this code is not optimized for speed, but rather designed for clarity and ease of understanding, so it will take a few minutes to run on most images.
 
 ## Template Matching Demo
 

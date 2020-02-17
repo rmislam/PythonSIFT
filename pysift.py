@@ -21,7 +21,7 @@ def computeKeypointsAndDescriptors(image, sigma=1.6, num_intervals=3, assumed_bl
     image = image.astype('float32')
     base_image = generateBaseImage(image, sigma, assumed_blur)
     num_octaves = computeNumberOfOctaves(base_image.shape)
-    gaussian_kernels = generateGaussianKernels(sigma, num_octaves, num_intervals)
+    gaussian_kernels = generateGaussianKernels(sigma, num_intervals)
     gaussian_images = generateGaussianImages(base_image, num_octaves, gaussian_kernels)
     dog_images = generateDoGImages(gaussian_images)
     keypoints = findScaleSpaceExtrema(gaussian_images, dog_images, num_intervals, sigma, image_border_width)
@@ -45,9 +45,9 @@ def generateBaseImage(image, sigma, assumed_blur):
 def computeNumberOfOctaves(image_shape):
     """Compute number of octaves in image pyramid as function of base image shape (OpenCV default)
     """
-    return int(round(log(min(image_shape)) / log(2) - 2) + 1)
+    return int(round(log(min(image_shape)) / log(2) - 1))
 
-def generateGaussianKernels(sigma, num_octaves, num_intervals):
+def generateGaussianKernels(sigma, num_intervals):
     """Generate list of gaussian kernels at which to blur the input image. Default values of sigma, intervals, and octaves follow section 3 of Lowe's paper.
     """
     logger.debug('Generating scales...')
