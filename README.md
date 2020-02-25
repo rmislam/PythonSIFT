@@ -35,6 +35,7 @@ The returned `keypoints` are a list of OpenCV `KeyPoint` objects, and the corres
 You can find a step-by-step, detailed explanation of the code in this repo in my two-part tutorial:
 
 [Implementing SIFT in Python: A Complete Guide (Part 1)](https://medium.com/@russmislam/implementing-sift-in-python-a-complete-guide-part-1-306a99b50aa5)
+
 [Implementing SIFT in Python: A Complete Guide (Part 2)](https://medium.com/@russmislam/implementing-sift-in-python-a-complete-guide-part-2-c4350274be2b)
 
 I'll walk you through each function, printing and plotting things along the way to develop a solid understanding of SIFT and its implementation details.
