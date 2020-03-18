@@ -178,7 +178,7 @@ def localizeExtremumViaQuadraticFit(i, j, image_index, octave_index, num_interva
             keypoint = KeyPoint()
             keypoint.pt = ((j + extremum_update[0]) * (2 ** octave_index), (i + extremum_update[1]) * (2 ** octave_index))
             keypoint.octave = octave_index + image_index * (2 ** 8) + int(round((extremum_update[2] + 0.5) * 255)) * (2 ** 16)
-            keypoint.size = sigma * (2 ** ((image_index + extremum_update[2]) / float32(num_intervals))) * (2 ** (octave_index + 1))
+            keypoint.size = sigma * (2 ** ((image_index + extremum_update[2]) / float32(num_intervals))) * (2 ** (octave_index + 1))  # octave_index + 1 because the input image was doubled
             keypoint.response = abs(functionValueAtUpdatedExtremum)
             return keypoint, image_index
     return None
@@ -224,7 +224,7 @@ def computeKeypointsWithOrientations(keypoint, octave_index, gaussian_image, rad
     keypoints_with_orientations = []
     image_shape = gaussian_image.shape
 
-    scale = scale_factor * 0.5 * keypoint.size / float32(2 ** octave_index)
+    scale = scale_factor * keypoint.size / float32(2 ** (octave_index + 1))  # compare with keypoint.size computation in localizeExtremumViaQuadraticFit()
     radius = int(round(radius_factor * scale))
     weight_factor = -0.5 / (scale ** 2)
     raw_histogram = zeros(num_bins)
