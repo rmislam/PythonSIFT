@@ -59,8 +59,9 @@ Any questions about the implementation, no matter how simple, are welcome. I wil
 
 Definitely worth a read!
 
-### *Patent Notice*
+### *Legal Notice*
 
-SIFT is patented, so the code in this repo may **not** be used for commerical purposes. Let me be clear that this repo is for educational purposes only.
+SIFT *was* patented, but it has expired.
+This repo is primarily meant for educational purposes, but feel free to use my code any way you want, commercial or otherwise. All I ask is that you cite or share this repo.
 
-You can find the patent [here](https://patents.google.com/patent/US6711293B1/en) (Inventor: David G. Lowe. Assignee: University of British Columbia.).
+You can find the original (now expired) patent [here](https://patents.google.com/patent/US6711293B1/en) (Inventor: David G. Lowe. Assignee: University of British Columbia.).
