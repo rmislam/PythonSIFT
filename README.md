@@ -16,6 +16,22 @@ PythonSIFT has been reimplemented (and greatly improved!) in Python 3. You can f
 
 Last tested successfully using `Python 3.7.6` and `OpenCV-Python 4.2.0`.
 
+## Installation
+
+```
+$ git clone https://github.com/rmislam/PythonSIFT.git
+$ cd PythonSIFT
+$ pip install -U pip
+$ pip install -e .[examples]
+```
+
+## Examples
+
+```bash
+cd examples
+python template_matching_demo.py
+```
+
 ## Usage
 
 ```python
