@@ -14,7 +14,7 @@ PythonSIFT has been reimplemented (and greatly improved!) in Python 3. You can f
 
 `OpenCV-Python`
 
-Last tested successfully using `Python 3.7.6` and `OpenCV-Python 4.2.0`.
+Last tested successfully using `Python 3.8.5`, `Numpy 1.19.4` and `OpenCV-Python 4.3.0`.
 
 ## Usage
 
