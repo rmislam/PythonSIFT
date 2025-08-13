@@ -2,9 +2,9 @@
 
 This is an implementation of SIFT (David G. Lowe's scale-invariant feature transform) done entirely in Python with the help of NumPy. This implementation is based on OpenCV's implementation and returns OpenCV `KeyPoint` objects and descriptors, and so can be used as a drop-in replacement for OpenCV SIFT. This repository is intended to help computer vision enthusiasts learn about the details behind SIFT.
 
-### *Update 2/11/2020*
+### *Important Note0*
 
-PythonSIFT has been reimplemented (and greatly improved!) in Python 3. You can find the original Python 2 version in the `legacy` branch. However, I strongly recommend you use `master` (the new Python 3 implementation). It's much better.
+Please note that this repo is called PythonSIFT, not PySift. There is another library called PySift (https://pypi.org/project/pysift/) that has nothing to do with this repo. A few times a year, I get comments about PySift failing with urlparse. Please go talk to the PySift people about it. Before you open an issue here, please double-check that you are really using PythonSIFT!
 
 ## Dependencies
 
